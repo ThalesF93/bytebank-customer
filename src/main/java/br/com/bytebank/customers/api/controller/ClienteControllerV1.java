@@ -1,6 +1,6 @@
-package br.com.bytebank.customers.api.controllers;
+package br.com.bytebank.customers.api.controller;
 
-import br.com.bytebank.customers.domain.entities.Customer;
+import br.com.bytebank.customers.domain.entity.Customer;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

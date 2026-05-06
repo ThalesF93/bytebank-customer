@@ -1,4 +1,4 @@
-package br.com.bytebank.customers.api.controllers;
+package br.com.bytebank.customers.api.controller;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;

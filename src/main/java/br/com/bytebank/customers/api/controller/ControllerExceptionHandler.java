@@ -1,8 +1,8 @@
-package br.com.bytebank.customers.api.controllers;
+package br.com.bytebank.customers.api.controller;
 
 
-import br.com.bytebank.customers.domain.exceptions.ClienteJaExistenteException;
-import br.com.bytebank.customers.domain.exceptions.ResourceNotFoundException;
+import br.com.bytebank.customers.domain.exception.ClienteJaExistenteException;
+import br.com.bytebank.customers.domain.exception.ResourceNotFoundException;
 import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

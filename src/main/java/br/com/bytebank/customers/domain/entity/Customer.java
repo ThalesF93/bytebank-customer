@@ -1,4 +1,4 @@
-package br.com.bytebank.customers.domain.entities;
+package br.com.bytebank.customers.domain.entity;
 
 
 import br.com.bytebank.customers.domain.enums.CustomerStatus;

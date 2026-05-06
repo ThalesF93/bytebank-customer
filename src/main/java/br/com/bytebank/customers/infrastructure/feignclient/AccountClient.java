@@ -1,4 +1,4 @@
-package br.com.bytebank.customers.infrastructure.feignclients;
+package br.com.bytebank.customers.infrastructure.feignclient;
 
 
 import br.com.bytebank.customers.infrastructure.config.FeignConfig;

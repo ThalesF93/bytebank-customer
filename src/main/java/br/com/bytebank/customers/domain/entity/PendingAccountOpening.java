@@ -1,4 +1,4 @@
-package br.com.bytebank.customers.domain.entities;
+package br.com.bytebank.customers.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

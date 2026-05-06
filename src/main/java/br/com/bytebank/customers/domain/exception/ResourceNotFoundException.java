@@ -1,4 +1,4 @@
-package br.com.bytebank.customers.domain.exceptions;
+package br.com.bytebank.customers.domain.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
