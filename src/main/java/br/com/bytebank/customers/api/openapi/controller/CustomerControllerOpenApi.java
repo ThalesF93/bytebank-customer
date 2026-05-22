@@ -75,7 +75,7 @@ public interface CustomerControllerOpenApi {
             @ApiResponse(
                     responseCode = "200",
                     description = "Customer found successfully",
-                    content = @Content(schema = @Schema(implementation = CustomerUpdateDTO.class))
+                    content = @Content(schema = @Schema(implementation = CustomerShortResponseDTO.class))
             ),
 
             @ApiResponse(
