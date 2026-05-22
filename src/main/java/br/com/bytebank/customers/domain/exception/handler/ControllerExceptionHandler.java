@@ -1,96 +1,50 @@
 package br.com.bytebank.customers.domain.exception.handler;
 
 
-import br.com.bytebank.customers.domain.exception.DuplicateCustomerException;
-import br.com.bytebank.customers.domain.exception.ResourceNotFoundException;
-import feign.FeignException;
+import br.com.bytebank.customers.domain.exception.default_exception.DefaultException;
+import br.com.bytebank.customers.domain.exception.dto.ErrorResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
-import org.springframework.validation.FieldError;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(FeignException.class)
-    public ProblemDetail handleFeignException(final FeignException exception){
-        HttpStatus status;
-        try {
-            status = HttpStatus.valueOf(exception.status());
-        } catch (IllegalArgumentException e) {
-            status = HttpStatus.SERVICE_UNAVAILABLE;
-        }
+    private static final Logger log = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
-        return ProblemDetail.forStatusAndDetail(status, exception.getMessage());
-    }
-
-    @ExceptionHandler(DuplicateCustomerException.class)
-    public ProblemDetail conflict(final DuplicateCustomerException exception){
-        
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
-            HttpStatus.CONFLICT, 
-            exception.getMessage()
-        );
-        
-        problemDetail.setTitle("Customer already exists");
-        problemDetail.setType(URI.create("https://api.byteback.com.br/errors/duplicated-customer"));
-        
-        return problemDetail;
+    @ExceptionHandler(DefaultException.class)
+    public ResponseEntity<ErrorResponse> handleDefaultException(DefaultException e, HttpServletRequest request){
+        log.warn("Error: {} - {}", e.getCode(), e.getMessage());
+        return ResponseEntity
+                .status(e.getStatus())
+                .body(ErrorResponse.of(e.getCode(), e.getMessage(), e.getStatus().value(), request.getRequestURI()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ProblemDetail handleValidation(final MethodArgumentNotValidException exception){
+    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex, HttpServletRequest request) {
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                .collect(Collectors.joining(", "));
 
-        Map<String, String> validationErrors = buildValidationErrorResponse(exception);
-
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
-            HttpStatus.BAD_REQUEST, 
-            "validation field error"
-        );
-        
-        problemDetail.setTitle("Invalid data");
-        problemDetail.setProperty("errors", validationErrors);
-        problemDetail.setType(URI.create("https://api.coderbank.com.br/errors/validation"));
-
-        return problemDetail;
-    }
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ProblemDetail handleNotFound(ResourceNotFoundException ex) {
-
-        return ProblemDetail.forStatusAndDetail(
-                HttpStatus.NOT_FOUND,
-                ex.getMessage()
-        );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponse.of("VALIDATION_ERROR", message, 400, request.getRequestURI()));
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ProblemDetail handleGeneric(Exception ex) {
-        return ProblemDetail.forStatusAndDetail(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                ex.getMessage()
-        );
-    }
-
-    private static Map<String, String> buildValidationErrorResponse(MethodArgumentNotValidException exception) {
-        Map<String, String> validationErrors = new HashMap<>();
-
-        exception.getBindingResult()
-                .getAllErrors()
-                .forEach(error -> {
-                    String fieldName = ((FieldError) error).getField();
-                    String errorMessage = error.getDefaultMessage();
-                    validationErrors.put(fieldName, errorMessage);
-                });
-        return validationErrors;
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, HttpServletRequest request) {
+        log.error("Unexpected error", ex);
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponse.of("INTERNAL_ERROR", "Unexpected Error", 500, request.getRequestURI()));
     }
 }

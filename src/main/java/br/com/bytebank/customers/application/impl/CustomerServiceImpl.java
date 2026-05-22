@@ -9,8 +9,8 @@ import br.com.bytebank.customers.application.service.CustomerService;
 import br.com.bytebank.customers.domain.entity.Customer;
 import br.com.bytebank.customers.domain.enums.AccountStatus;
 import br.com.bytebank.customers.domain.enums.CustomerStatus;
-import br.com.bytebank.customers.domain.exception.CustomerNotFoundException;
-import br.com.bytebank.customers.domain.exception.DuplicateCustomerException;
+import br.com.bytebank.customers.domain.exception.customized_exceptions.CustomerNotFoundException;
+import br.com.bytebank.customers.domain.exception.customized_exceptions.DuplicateCustomerException;
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
     @CacheEvict(value = "customers-by-id", allEntries = true)
     public CustomerUpdateDTO updateCustomer(UUID uuid, CustomerUpdateDTO customerUpdateDTO) {
         var customer = repository.findById(uuid).orElseThrow(
-                ()-> new CustomerNotFoundException("Customer id not found" + uuid)
+                ()-> new CustomerNotFoundException(uuid)
         );
 
         customer.setName(customerUpdateDTO.name());
@@ -77,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Cacheable(value = "customers-by-id", key = "#id")
     public CustomerClientResponseDTO findCustomerById(UUID id) {
         var customer = repository.findById(id).orElseThrow(
-                ()-> new CustomerNotFoundException("Customer Not found. ID= " + id)
+                ()-> new CustomerNotFoundException(id)
         );
         return new CustomerClientResponseDTO(customer.getId(), customer.getName(), customer.getEmail());
     }
@@ -92,7 +92,7 @@ public class CustomerServiceImpl implements CustomerService {
         final var cpf = dto.cpf();
 
         if (repository.existsByCpf(cpf)){
-            throw new DuplicateCustomerException("Customer with cpf " + cpf + " already exists");
+            throw new DuplicateCustomerException(cpf);
         }
     }
 

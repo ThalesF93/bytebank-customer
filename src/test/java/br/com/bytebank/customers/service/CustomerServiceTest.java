@@ -6,8 +6,8 @@ import br.com.bytebank.customers.api.dtos.responses.CustomerClientResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import br.com.bytebank.customers.application.impl.CustomerServiceImpl;
 import br.com.bytebank.customers.domain.entity.Customer;
-import br.com.bytebank.customers.domain.exception.CustomerNotFoundException;
-import br.com.bytebank.customers.domain.exception.DuplicateCustomerException;
+import br.com.bytebank.customers.domain.exception.customized_exceptions.CustomerNotFoundException;
+import br.com.bytebank.customers.domain.exception.customized_exceptions.DuplicateCustomerException;
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import br.com.bytebank.customers.tests_builders.CustomerTestsBuilders;
@@ -63,7 +63,7 @@ class CustomerServiceTest {
 
 		assertThatExceptionOfType(DuplicateCustomerException.class)
 				.isThrownBy(()-> customerService.createCustomer(dto))
-						.withMessage("Customer with cpf " + dto.cpf() + " already exists");
+						.withMessage("Customer with CPF number = " + dto.cpf() + " already exists");
 
 		verify(customerRepository, never()).save(any(Customer.class));
 
@@ -126,7 +126,7 @@ class CustomerServiceTest {
 
 		assertThatExceptionOfType(CustomerNotFoundException.class)
 				.isThrownBy(() -> customerService.updateCustomer(id, dto))
-				.withMessage("Customer id not found" + id);
+				.withMessage("Customer with id " +id + " not found");
 
 		verify(customerRepository, never()).save(any());
 
@@ -159,7 +159,7 @@ class CustomerServiceTest {
 
 		assertThatExceptionOfType(CustomerNotFoundException.class)
 				.isThrownBy(() -> customerService.findCustomerById(id))
-				.withMessage("Customer Not found. ID= " + id);
+				.withMessage("Customer with id " + id + " not found");
 
 		verify(customerRepository).findById(id);
 	}

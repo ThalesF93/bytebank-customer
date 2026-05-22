@@ -3,6 +3,7 @@ package br.com.bytebank.customers.api.controller;
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
 import br.com.bytebank.customers.api.dtos.responses.*;
+import br.com.bytebank.customers.api.openapi.controller.CustomerControllerOpenApi;
 import br.com.bytebank.customers.application.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,11 @@ import java.util.UUID;
 @RequestMapping("api/v2/customers")
 @RequiredArgsConstructor
 @Slf4j
-public class CustomerControllerV2 {
+public class CustomerControllerV2 implements CustomerControllerOpenApi {
 
     private final CustomerService service;
 
+    @Override
     @PostMapping
     public ResponseEntity<CustomerResponseDTO> save(@Valid @RequestBody CustomerRequestDTO customerRequestDTO){
         log.atInfo()
@@ -36,6 +38,7 @@ public class CustomerControllerV2 {
                 .body(costumer);
     }
 
+    @Override
     @GetMapping
     public PagedResponse<CustomerShortResponseDTO> getCostumers(@RequestParam(defaultValue = "0") int page,
                                                                 @RequestParam(defaultValue = "10") int size){
@@ -47,12 +50,14 @@ public class CustomerControllerV2 {
         return new PagedResponse<>(costumerPage);
     }
 
+    @Override
     @PutMapping("/update/{id}")
     public ResponseEntity<CustomerUpdateDTO> updateCustomer(@PathVariable UUID id, @Valid @RequestBody CustomerUpdateDTO dto){
         log.info("Updating customer from id={}", id);
         return ResponseEntity.ok(service.updateCustomer(id, dto));
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<CustomerClientResponseDTO> findCustomerById(@PathVariable UUID id){
         return ResponseEntity.ok(service.findCustomerById(id));
