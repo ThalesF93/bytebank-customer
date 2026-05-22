@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
 
-@Tag(name = "Customers")
+@Tag(name = "MS - Customers")
 public interface CustomerControllerOpenApi {
 
     @Operation(summary = "Create Customer", description = "Creates a new customer into database")
