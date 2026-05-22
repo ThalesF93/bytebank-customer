@@ -3,6 +3,7 @@ package br.com.bytebank.customers.domain.exception.handler;
 
 import br.com.bytebank.customers.domain.exception.default_exception.DefaultException;
 import br.com.bytebank.customers.domain.exception.dto.ErrorResponse;
+import feign.FeignException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,4 +48,14 @@ public class ControllerExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ErrorResponse.of("INTERNAL_ERROR", "Unexpected Error", 500, request.getRequestURI()));
     }
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<ErrorResponse> handleFeignException(FeignException ex, HttpServletRequest request) {
+        log.error("Feign Client Error", ex);
+        int status = ex.status() > 0 ? ex.status() : 500;
+        return ResponseEntity
+                .status(status)
+                .body(ErrorResponse.of("FEIGN_CLIENT_ERROR", "Unexpected Error", status, request.getRequestURI()));
+    }
+
 }
