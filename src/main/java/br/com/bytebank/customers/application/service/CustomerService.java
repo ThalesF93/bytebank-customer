@@ -2,7 +2,6 @@ package br.com.bytebank.customers.application.service;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
-import br.com.bytebank.customers.api.dtos.responses.CustomerClientResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import org.springframework.data.domain.Page;
@@ -18,6 +17,6 @@ public interface CustomerService {
 
     CustomerUpdateDTO updateCustomer(UUID id, CustomerUpdateDTO customerRequestDTO);
 
-    CustomerClientResponseDTO findCustomerById(UUID id);
+    CustomerShortResponseDTO findCustomerById(UUID id);
 
 }

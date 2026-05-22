@@ -59,7 +59,7 @@ public class CustomerControllerV2 implements CustomerControllerOpenApi {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerClientResponseDTO> findCustomerById(@PathVariable UUID id){
+    public ResponseEntity<CustomerShortResponseDTO> findCustomerById(@PathVariable UUID id){
         return ResponseEntity.ok(service.findCustomerById(id));
     }
 }

@@ -2,7 +2,6 @@ package br.com.bytebank.customers.api.openapi.controller;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
-import br.com.bytebank.customers.api.dtos.responses.CustomerClientResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.PagedResponse;
@@ -23,5 +22,5 @@ public interface CustomerControllerOpenApi {
 
     ResponseEntity<CustomerUpdateDTO> updateCustomer(@PathVariable UUID id, @Valid @RequestBody CustomerUpdateDTO dto);
 
-    ResponseEntity<CustomerClientResponseDTO> findCustomerById(@PathVariable UUID id);
+    ResponseEntity<CustomerShortResponseDTO> findCustomerById(@PathVariable UUID id);
 }

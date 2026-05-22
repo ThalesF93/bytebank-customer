@@ -2,7 +2,6 @@ package br.com.bytebank.customers.service;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
-import br.com.bytebank.customers.api.dtos.responses.CustomerClientResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import br.com.bytebank.customers.application.impl.CustomerServiceImpl;
 import br.com.bytebank.customers.domain.entity.Customer;
@@ -142,7 +141,7 @@ class CustomerServiceTest {
 
 		when(customerRepository.findById(id)).thenReturn(Optional.of(customer));
 
-		CustomerClientResponseDTO result = customerService.findCustomerById(id);
+		CustomerShortResponseDTO result = customerService.findCustomerById(id);
 
 		assertThat(result.id()).isEqualTo(id);
 		assertThat(result.name()).isEqualTo(customer.getName());
