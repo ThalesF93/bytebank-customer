@@ -11,25 +11,25 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/clientes")
+@RequestMapping("api/v1/customers")
 public class CustomerControllerV1 {
 
     @Autowired
     private CustomerRepository repository;
 
     @PostMapping
-    public ResponseEntity<Customer> salvar(@RequestBody Customer customer){
-        var clienteResponde = repository.save(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponde);
+    public ResponseEntity<Customer> create(@RequestBody Customer customer){
+        var clienteResponse = repository.save(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponse);
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> obterTodos(){
+    public ResponseEntity<List<Customer>> listAll(){
         return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> buscarPorId(@PathVariable UUID id){
+    public ResponseEntity<Customer> findById(@PathVariable UUID id){
 
         var cliente = repository.findById(id).orElse(null);
 
@@ -38,13 +38,13 @@ public class CustomerControllerV1 {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable UUID id){
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> atualizar(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Customer> update(@PathVariable(value = "id") UUID id,
                                                                                       @RequestBody Customer customer){
 
         var clienteOptional = repository.findById(id);

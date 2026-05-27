@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO){
         checkDuplicateCPF(customerRequestDTO);
 
-        var customerEntity = dtoToEntity(customerRequestDTO);
+        var customerEntity = ToEntity(customerRequestDTO);
         customerEntity.setAccountStatus(AccountStatus.PENDING);
         repository.save(customerEntity);
 
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Page<CustomerShortResponseDTO> getCustomers(Pageable pageable){
         return repository.findAll(pageable)
-                .map(converteParaClienteResumoResponseDTO());
+                .map(convertToCustomerResumeResponseDTO());
     }
 
     @Override
@@ -81,7 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
         return new CustomerShortResponseDTO(customer.getId(), customer.getName(), customer.getEmail(), customer.getCustomerStatus());
     }
 
-    private static Function<Customer, CustomerShortResponseDTO> converteParaClienteResumoResponseDTO() {
+    private static Function<Customer, CustomerShortResponseDTO> convertToCustomerResumeResponseDTO() {
         return customer -> new CustomerShortResponseDTO(
                 customer.getId(), customer.getName(), customer.getEmail(), customer.getCustomerStatus()
         );
@@ -95,7 +95,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private static Customer dtoToEntity(CustomerRequestDTO customerRequestDTO) {
+    private static Customer ToEntity(CustomerRequestDTO customerRequestDTO) {
         var customerEntity = new Customer();
         customerEntity.setName(customerRequestDTO.name());
         customerEntity.setCpf(customerRequestDTO.cpf());
