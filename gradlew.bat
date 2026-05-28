@@ -87,3 +87,4 @@ exit /b 1
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
+gradle wrapper --gradle-version 8.5
