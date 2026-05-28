@@ -16,8 +16,8 @@ public class CustomerEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void publishCustomerCreated(UUID customerId) {
-        var event = new CustomerCreatedEvent(customerId);
+    public void publishCustomerCreated(UUID idempotencyKey, UUID customerId) {
+        var event = new CustomerCreatedEvent(idempotencyKey,customerId);
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_CUSTOMER,
                 RabbitMQConfig.ROUTING_KEY_CUSTOMER_CREATED,

@@ -14,9 +14,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-
 
 import java.util.UUID;
 
@@ -40,7 +38,12 @@ public interface CustomerControllerOpenApi {
                     description = "Invalid request data",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    ResponseEntity<CustomerResponseDTO> save(@RequestBody(description = "Attributes required to Create a customer", required = true) CustomerRequestDTO customerRequestDTO);
+    ResponseEntity<CustomerResponseDTO> save(
+            @Parameter(
+                    description = "Unique key to ensure idempotency of the request",
+                    required = true
+            )  UUID idempotencyKey,
+            @RequestBody(description = "Attributes required to Create a customer", required = true) CustomerRequestDTO customerRequestDTO);
 
     @Operation(summary = "Returns a list from all customers")
     @ApiResponses({

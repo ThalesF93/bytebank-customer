@@ -10,19 +10,26 @@ import br.com.bytebank.customers.domain.enums.AccountStatus;
 import br.com.bytebank.customers.domain.enums.CustomerStatus;
 import br.com.bytebank.customers.domain.exception.customized_exceptions.CustomerNotFoundException;
 import br.com.bytebank.customers.domain.exception.customized_exceptions.DuplicateCustomerException;
+import br.com.bytebank.customers.domain.exception.customized_exceptions.IdempotencyCacheException;
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.util.UUID;
 import java.util.function.Function;
+
+import static br.com.bytebank.customers.domain.exception.customized_exceptions.IdempotencyCacheException.Operation.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,24 +38,38 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository repository;
     private final CustomerEventPublisher eventPublisher;
+    private final ObjectMapper objectMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     @Transactional
     @CacheEvict(value = {"account-status", "customers-by-id"}, allEntries = true)
-    public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO){
+    public CustomerResponseDTO createCustomer(UUID idempotencyKey, CustomerRequestDTO customerRequestDTO) {
         checkDuplicateCPF(customerRequestDTO);
 
-        var customerEntity = ToEntity(customerRequestDTO);
+        String cacheKey = "idempotency:customer:" + idempotencyKey;
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+
+        if (cached != null) {
+            log.info("Duplicate customer detected. idempotencyKey={}", idempotencyKey);
+            return fromIdempotencyCache(cached, CustomerResponseDTO.class);
+        }
+
+        var customerEntity = toEntity(customerRequestDTO);
         customerEntity.setAccountStatus(AccountStatus.PENDING);
         repository.save(customerEntity);
 
-        eventPublisher.publishCustomerCreated(customerEntity.getId());
+        eventPublisher.publishCustomerCreated(idempotencyKey ,customerEntity.getId());
 
         log.info("Registered customer. customerId={}", customerEntity.getId());
 
-        return CustomerResponseDTO.accountPending(customerEntity);
-    }
+        var response = CustomerResponseDTO.accountPending(customerEntity);
 
+        toIdempotencyCache(cacheKey, response);
+
+        return response;
+
+    }
 
     @Override
     public Page<CustomerShortResponseDTO> getCustomers(Pageable pageable){
@@ -95,7 +116,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private static Customer ToEntity(CustomerRequestDTO customerRequestDTO) {
+    private static Customer toEntity(CustomerRequestDTO customerRequestDTO) {
         var customerEntity = new Customer();
         customerEntity.setName(customerRequestDTO.name());
         customerEntity.setCpf(customerRequestDTO.cpf());
@@ -109,4 +130,21 @@ public class CustomerServiceImpl implements CustomerService {
         return customerEntity;
     }
 
+    private void toIdempotencyCache(String cacheKey, Object value) {
+        try {
+            redisTemplate.opsForValue().set(cacheKey, objectMapper.writeValueAsString(value), Duration.ofHours(24));
+        } catch (JsonProcessingException e) {
+            log.error("Failed to serialize idempotency response. type={}", value.getClass().getSimpleName(), e);
+            throw new IdempotencyCacheException(SERIALIZE);
+        }
+    }
+
+    private <T> T fromIdempotencyCache(Object value, Class<T> clazz) {
+        try {
+            return objectMapper.readValue(value.toString(), clazz);
+        } catch (JsonProcessingException e) {
+            log.error("Failed to deserialize idempotency response. type={}", clazz.getSimpleName(), e);
+            throw new IdempotencyCacheException(DESERIALIZE);
+        }
+    }
 }

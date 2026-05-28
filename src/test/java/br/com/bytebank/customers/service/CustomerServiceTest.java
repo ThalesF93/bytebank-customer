@@ -2,6 +2,7 @@ package br.com.bytebank.customers.service;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
+import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import br.com.bytebank.customers.application.impl.CustomerServiceImpl;
 import br.com.bytebank.customers.domain.entity.Customer;
@@ -10,6 +11,9 @@ import br.com.bytebank.customers.domain.exception.customized_exceptions.Duplicat
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import br.com.bytebank.customers.tests_builders.CustomerTestsBuilders;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +24,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,32 +46,67 @@ class CustomerServiceTest {
 	@Mock
 	CustomerEventPublisher eventPublisher;
 
+	@Mock
+	RedisTemplate<String, Object> redisTemplate;
+
+	@Mock
+	ValueOperations<String, Object> valueOperations;
+
+	@Mock
+	ObjectMapper objectMapper;
+
+
 	@Test
 	@DisplayName("Should create a customer successfully")
 	void mustCreateCustomer() {
+		UUID idempotencyKey = UUID.randomUUID();
 		CustomerRequestDTO dto = CustomerTestsBuilders.customerRequestDTOBuilder();
 		var entity = CustomerTestsBuilders.createEntityWithDTO(dto);
 
-		var result = customerService.createCustomer(dto);
+		when(redisTemplate.opsForValue()).thenReturn(valueOperations);
+		when(valueOperations.get(anyString())).thenReturn(null);
+		when(redisTemplate.opsForValue().get(anyString())).thenReturn(null);
+
+		var result = customerService.createCustomer(idempotencyKey, dto);
 
 		verify(customerRepository).save(entity);
-		verify(eventPublisher).publishCustomerCreated(entity.getId());
+		verify(eventPublisher).publishCustomerCreated(idempotencyKey ,entity.getId());
 
 		assertThat(dto.name()).isEqualTo(entity.getName());
 	}
 
 	@Test
-	@DisplayName("Should throw Exception when passing a duplicated cpf")
-	void mustThrowException(){
+	@DisplayName("Should return cached response when idempotency key already exists")
+	void mustReturnCachedResponseWhenDuplicateRequest() throws JsonProcessingException {
+		UUID idempotencyKey = UUID.randomUUID();
 		CustomerRequestDTO dto = CustomerTestsBuilders.customerRequestDTOBuilder();
+		CustomerResponseDTO cachedResponse = CustomerTestsBuilders.customerResponseDTOBuilder();
+		String cachedJson = "AnyString";
+
+		when(redisTemplate.opsForValue()).thenReturn(valueOperations);
+		when(valueOperations.get(anyString())).thenReturn(cachedJson);
+		when(objectMapper.readValue(anyString(), eq(CustomerResponseDTO.class))).thenReturn(cachedResponse);
+
+		var result = customerService.createCustomer(idempotencyKey, dto);
+
+		assertThat(result).isEqualTo(cachedResponse);
+		verify(customerRepository, never()).save(any(Customer.class));
+		verify(eventPublisher, never()).publishCustomerCreated(any() ,any());
+	}
+
+	@Test
+	@DisplayName("Should throw Exception when passing a duplicated cpf")
+	void mustThrowException() {
+		UUID idempotencyKey = UUID.randomUUID();
+		CustomerRequestDTO dto = CustomerTestsBuilders.customerRequestDTOBuilder();
+
 		when(customerRepository.existsByCpf(dto.cpf())).thenReturn(true);
 
 		assertThatExceptionOfType(DuplicateCustomerException.class)
-				.isThrownBy(()-> customerService.createCustomer(dto))
-						.withMessage("Customer with CPF number = " + dto.cpf() + " already exists");
+				.isThrownBy(() -> customerService.createCustomer(idempotencyKey, dto))
+				.withMessage("Customer with CPF number = " + dto.cpf() + " already exists");
 
 		verify(customerRepository, never()).save(any(Customer.class));
-
 	}
 	@Test
 	@DisplayName("Should return a page of CustomerShortResponseDTO")

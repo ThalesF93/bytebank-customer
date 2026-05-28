@@ -5,6 +5,7 @@ import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
 import br.com.bytebank.customers.api.dtos.responses.*;
 import br.com.bytebank.customers.api.openapi.controller.CustomerControllerOpenApi;
 import br.com.bytebank.customers.application.service.CustomerService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +26,15 @@ public class CustomerControllerV2 implements CustomerControllerOpenApi {
 
     @Override
     @PostMapping
-    public ResponseEntity<CustomerResponseDTO> save(@Valid @RequestBody CustomerRequestDTO customerRequestDTO){
+    public ResponseEntity<CustomerResponseDTO> save(
+            @RequestHeader(value = "Idempotency-Key") UUID idempotencyKey,
+            @Valid @RequestBody CustomerRequestDTO customerRequestDTO){
         log.atInfo()
                 .setMessage("Request received. endpoint=POST")
                 .addKeyValue("Customer" , customerRequestDTO.name())
                 .log();
 
-        var costumer = service.createCustomer(customerRequestDTO);
+        var costumer = service.createCustomer(idempotencyKey, customerRequestDTO);
 
         log.info("Request completed. clientId={} status={}", costumer.id(), costumer.customerStatus());
         return ResponseEntity.status(HttpStatus.CREATED)

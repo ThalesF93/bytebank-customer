@@ -2,14 +2,22 @@ package br.com.bytebank.customers.tests_builders;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
+import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;
 import br.com.bytebank.customers.domain.entity.Customer;
 import br.com.bytebank.customers.domain.enums.CustomerStatus;
+
+import java.util.UUID;
 
 public class CustomerTestsBuilders {
 
     public static CustomerRequestDTO customerRequestDTOBuilder() {
         return new CustomerRequestDTO(
                 "Mock", "123.456.789-10", "email@email.com", "test", 33
+        );
+    }
+    public static CustomerResponseDTO customerResponseDTOBuilder() {
+        return new CustomerResponseDTO(
+                UUID.randomUUID(), CustomerStatus.ACTIVE, null, null, null, null, null
         );
     }
 
