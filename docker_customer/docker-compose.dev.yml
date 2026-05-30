@@ -1,0 +1,45 @@
+services:
+  customer-db:
+    image: postgres:16
+    container_name: customer-db
+    environment:
+      POSTGRES_DB: customer_db
+      POSTGRES_USER: bytebank
+      POSTGRES_PASSWORD: bytebank
+    ports:
+      - "5432:5432"
+    volumes:
+      - customer_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bytebank -d customer_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bytebank-net
+
+#  bytebank-customer:
+#    build:
+#      context: ../
+#    container_name: bytebank-customer
+#    depends_on:
+#      customer-db:
+#        condition: service_healthy
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://customer-db:5432/customer_db
+#      SPRING_DATASOURCE_USERNAME: bytebank
+#      SPRING_DATASOURCE_PASSWORD: bytebank
+#      SPRING_DATA_REDIS_HOST: redis
+#      SPRING_RABBITMQ_HOST: rabbitmq
+#      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
+#    ports:
+#      - "8081:8081"
+#    networks:
+#      - bytebank-net
+
+networks:
+  bytebank-net:
+    external: true
+
+volumes:
+  customer_data:
