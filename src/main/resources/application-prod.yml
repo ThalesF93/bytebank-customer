@@ -35,11 +35,11 @@ spring:
       ddl-auto: update
     show-sql: false
 
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: ${DB_URL}
-#    username: ${DB_USERNAME}
-#    password: ${DB_PASSWORD}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   cloud:
     openfeign:
@@ -84,13 +84,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info, prometheus, metrics
+        include: health, info, prometheus, metrics, heapdump
   tracing:
     sampling:
       probability: 1.0
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_ENDPOINT}+
+      endpoint: ${ZIPKIN_ENDPOINT}
 
 springdoc:
   api-docs:

@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="135e3ea4-474e-4e6e-9182-837d349c67a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docker/docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker_customer/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker_customer/docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="54" />
+    <option name="cachedIndexableFilesCount" value="58" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
@@ -61,29 +63,33 @@
     &quot;accountId&quot;: &quot;7c377a9f-b6a0-402f-ac5d-24a135053f61&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000007379364937" />
-      <entry key="MS500" value="1.0593750239296909" />
-      <entry key="S2" value="1.4952520882671207" />
-      <entry key="S5" value="2.0395959229357707" />
-      <entry key="S10" value="3.4710689204239666" />
-      <entry key="S30" value="7.0171360276198875" />
-      <entry key="S60" value="8.727085567093207" />
-      <entry key="M2" value="9.782711146941512" />
-      <entry key="M5" value="10.492165748377747" />
-      <entry key="M10" value="10.742461478871665" />
-      <entry key="M15" value="10.827492588194847" />
-      <entry key="M30" value="10.913336153422463" />
-      <entry key="H1" value="10.956565049513799" />
-      <entry key="H2" value="10.978256706195491" />
-      <entry key="H4" value="10.989121890720922" />
-      <entry key="D1" value="10.998186083577083" />
-      <entry key="W1" value="10.999740847076888" />
+      <entry key="MS100" value="1.7603925011442163" />
+      <entry key="MS500" value="4.385464554485597" />
+      <entry key="S2" value="7.508209854205949" />
+      <entry key="S5" value="9.224420328717752" />
+      <entry key="S10" value="10.028530661060408" />
+      <entry key="S30" value="10.692102300426713" />
+      <entry key="S60" value="11.145368471265092" />
+      <entry key="M2" value="11.881981854524954" />
+      <entry key="M5" value="12.869415658971072" />
+      <entry key="M10" value="13.374195877439757" />
+      <entry key="M15" value="13.584097801136531" />
+      <entry key="M30" value="13.91697243224444" />
+      <entry key="H1" value="14.62044228389036" />
+      <entry key="H2" value="17.322467242118513" />
+      <entry key="H4" value="22.38057413058386" />
+      <entry key="D1" value="32.69361073404001" />
+      <entry key="W1" value="35.49319104342388" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -91,37 +97,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="S30" value="1.3226115903892708E-212" />
+      <entry key="S60" value="1.150048516537137E-106" />
+      <entry key="M2" value="1.0724031501898607E-53" />
+      <entry key="M5" value="6.488483916039129E-22" />
+      <entry key="M10" value="2.5472502656863404E-11" />
+      <entry key="M15" value="8.657272294744583E-8" />
+      <entry key="M30" value="2.94232430142304E-4" />
+      <entry key="H1" value="0.01715320466100443" />
+      <entry key="H2" value="0.13097024341813074" />
+      <entry key="H4" value="0.36189811192949156" />
+      <entry key="D1" value="0.8441722133710071" />
+      <entry key="W1" value="0.9760906449192845" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9330336705768558" />
-      <entry key="MS500" value="1.0446281636735684" />
-      <entry key="S2" value="1.489740156640532" />
-      <entry key="S5" value="2.036710432786372" />
-      <entry key="S10" value="3.4689619432598504" />
-      <entry key="S30" value="7.015912307491767" />
-      <entry key="S60" value="8.726349313602293" />
-      <entry key="M2" value="9.782304713580876" />
-      <entry key="M5" value="10.491992888536513" />
-      <entry key="M10" value="10.742373235350115" />
-      <entry key="M15" value="10.827433348501993" />
-      <entry key="M30" value="10.913306326292057" />
-      <entry key="H1" value="10.956550083760042" />
-      <entry key="H2" value="10.978249210225274" />
-      <entry key="H4" value="10.989118139456691" />
-      <entry key="D1" value="10.998185457910454" />
-      <entry key="W1" value="10.999740757684771" />
+      <entry key="MS100" value="1.043575589025798" />
+      <entry key="MS500" value="4.135465654701575" />
+      <entry key="S2" value="7.433790999362957" />
+      <entry key="S5" value="9.193193578279196" />
+      <entry key="S10" value="10.012629579684907" />
+      <entry key="S30" value="10.68672558972937" />
+      <entry key="S60" value="11.14264482032619" />
+      <entry key="M2" value="11.880587704212607" />
+      <entry key="M5" value="12.868840166385171" />
+      <entry key="M10" value="13.373903435439315" />
+      <entry key="M15" value="13.583901218604366" />
+      <entry key="M30" value="13.917165517642475" />
+      <entry key="H1" value="14.637536267018016" />
+      <entry key="H2" value="17.4533848995684" />
+      <entry key="H4" value="22.742423418381872" />
+      <entry key="D1" value="33.53776705538981" />
+      <entry key="W1" value="36.46927911620835" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -132,40 +138,127 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "feaure/develop",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/OneDrive/Documentos/Java Projetos 2026/Bytebank-PoliRepo/bytebank-customer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/User/OneDrive/Documentos/Java Projetos 2026/ByteBank/bytebank-customer/src/main/java/org/thales/Main.java",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker_customer/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build bytebank-customer.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CustomerServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CustomersApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feaure/develop&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/OneDrive/Documentos/Java Projetos 2026/Bytebank-PoliRepo/bytebank-customer&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/User/OneDrive/Documentos/Java Projetos 2026/ByteBank/bytebank-customer/src/main/java/org/thales/Main.java&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Spring Boot.CustomersApplication">
+    <configuration name="CustomerServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;br.com.bytebank.customers.service.CustomerServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration name="CustomersApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" value="local" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="bytebank-customer.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.bytebank.customers.CustomersApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker_customer/docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker_customer/docker-compose.dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker/docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker/docker-compose.dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.docker/docker-compose.dev.yml: Compose Deployment" />
+      <item itemvalue="Docker.docker_customer/docker-compose.dev.yml: Compose Deployment" />
+      <item itemvalue="Gradle.CustomerServiceTest" />
+      <item itemvalue="Spring Boot.CustomersApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker_customer/docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="Gradle.CustomerServiceTest" />
+        <item itemvalue="Docker.docker/docker-compose.dev.yml: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -185,6 +278,11 @@
       <workItem from="1774896435452" duration="2000" />
       <workItem from="1779988650856" duration="589000" />
       <workItem from="1779992646301" duration="1869000" />
+      <workItem from="1780088315627" duration="9380000" />
+      <workItem from="1780109759526" duration="12000" />
+      <workItem from="1780110132657" duration="67000" />
+      <workItem from="1780110624816" duration="4000" />
+      <workItem from="1780320717129" duration="1229000" />
     </task>
     <servers />
   </component>
