@@ -12,6 +12,7 @@ import br.com.bytebank.customers.domain.exception.customized_exceptions.Customer
 import br.com.bytebank.customers.domain.exception.customized_exceptions.DuplicateCustomerException;
 import br.com.bytebank.customers.domain.exception.customized_exceptions.IdempotencyCacheException;
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
+import br.com.bytebank.customers.infrastructure.messaging.event.CustomerSendCreatedEvent;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     @CacheEvict(value = {"account-status", "customers-by-id"}, allEntries = true)
-    public CustomerResponseDTO createCustomer(UUID idempotencyKey, CustomerRequestDTO customerRequestDTO) {
+    public ServiceResult<CustomerResponseDTO> createCustomer(UUID idempotencyKey, CustomerRequestDTO customerRequestDTO) {
         checkDuplicateCPF(customerRequestDTO);
 
         String cacheKey = "idempotency:customer:" + idempotencyKey;
@@ -52,14 +53,15 @@ public class CustomerServiceImpl implements CustomerService {
 
         if (cached != null) {
             log.info("Duplicate customer detected. idempotencyKey={}", idempotencyKey);
-            return fromIdempotencyCache(cached, CustomerResponseDTO.class);
+            return new ServiceResult<>(fromIdempotencyCache(cached, CustomerResponseDTO.class), true);
         }
 
         var customerEntity = toEntity(customerRequestDTO);
         customerEntity.setAccountStatus(AccountStatus.PENDING);
         repository.save(customerEntity);
 
-        eventPublisher.publishCustomerCreated(idempotencyKey ,customerEntity.getId());
+        var event = new CustomerSendCreatedEvent(customerEntity.getId(), idempotencyKey);
+        eventPublisher.publishCustomerCreated(event);
 
         log.info("Registered customer. customerId={}", customerEntity.getId());
 
@@ -67,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         toIdempotencyCache(cacheKey, response);
 
-        return response;
+        return new ServiceResult<>(response, false);
 
     }
 
@@ -147,4 +149,6 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IdempotencyCacheException(DESERIALIZE);
         }
     }
+
+    public record ServiceResult<T>(T data, boolean isDuplicate){}
 }

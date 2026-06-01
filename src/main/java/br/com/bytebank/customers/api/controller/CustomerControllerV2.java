@@ -34,11 +34,11 @@ public class CustomerControllerV2 implements CustomerControllerOpenApi {
                 .addKeyValue("Customer" , customerRequestDTO.name())
                 .log();
 
-        var costumer = service.createCustomer(idempotencyKey, customerRequestDTO);
+        var result = service.createCustomer(idempotencyKey, customerRequestDTO);
+        HttpStatus status = result.isDuplicate() ? HttpStatus.OK : HttpStatus.CREATED;
 
-        log.info("Request completed. clientId={} status={}", costumer.id(), costumer.customerStatus());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(costumer);
+        log.info("Request completed. clientId={} status={}", result.data().id(), result.data().customerStatus());
+        return ResponseEntity.status(status).body(result.data());
     }
 
     @Override
