@@ -24,6 +24,7 @@ public class AccountEventListener {
         log.info("Event received: AccountOpenedEvent customerId={} accountId={}",
                 event.customerId(), event.accountId());
 
+
         customerRepository.findById(event.customerId()).ifPresentOrElse(
                 customer -> {
                     customer.setAccountStatus(AccountStatus.CREATED);

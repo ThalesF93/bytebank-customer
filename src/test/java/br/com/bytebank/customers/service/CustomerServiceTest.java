@@ -9,6 +9,7 @@ import br.com.bytebank.customers.domain.entity.Customer;
 import br.com.bytebank.customers.domain.exception.customized_exceptions.CustomerNotFoundException;
 import br.com.bytebank.customers.domain.exception.customized_exceptions.DuplicateCustomerException;
 import br.com.bytebank.customers.infrastructure.messaging.CustomerEventPublisher;
+import br.com.bytebank.customers.infrastructure.messaging.event.CustomerSendCreatedEvent;
 import br.com.bytebank.customers.infrastructure.repositories.CustomerRepository;
 import br.com.bytebank.customers.tests_builders.CustomerTestsBuilders;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -70,7 +71,9 @@ class CustomerServiceTest {
 		var result = customerService.createCustomer(idempotencyKey, dto);
 
 		verify(customerRepository).save(entity);
-		verify(eventPublisher).publishCustomerCreated(idempotencyKey ,entity.getId());
+		verify(eventPublisher).publishCustomerCreated(
+				new CustomerSendCreatedEvent(entity.getId(), idempotencyKey)
+		);
 
 		assertThat(dto.name()).isEqualTo(entity.getName());
 	}
@@ -89,11 +92,11 @@ class CustomerServiceTest {
 
 		var result = customerService.createCustomer(idempotencyKey, dto);
 
-		assertThat(result).isEqualTo(cachedResponse);
+		assertThat(result.data()).isEqualTo(cachedResponse);
+		assertThat(result.isDuplicate()).isTrue();
 		verify(customerRepository, never()).save(any(Customer.class));
-		verify(eventPublisher, never()).publishCustomerCreated(any() ,any());
+		verify(eventPublisher, never()).publishCustomerCreated(any(CustomerSendCreatedEvent.class));
 	}
-
 	@Test
 	@DisplayName("Should throw Exception when passing a duplicated cpf")
 	void mustThrowException() {
