@@ -1,0 +1,7 @@
+{
+  "code": "VALIDATION_ERROR",
+  "message": "cpf: número do registro de contribuinte individual brasileiro (CPF) inválido",
+  "status": 400,
+  "path": "/api/v2/customers",
+  "timestamp": "2026-06-16T01:10:42.329696Z"
+}

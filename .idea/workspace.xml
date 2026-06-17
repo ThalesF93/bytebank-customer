@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="135e3ea4-474e-4e6e-9182-837d349c67a5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/responses/CustomerClientResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/costumers.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/costumers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/costumers.json.2026-05-28.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/costumers.json.2026-05-29.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/controller/CustomerControllerV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/controller/CustomerControllerV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/requests/CustomerRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/requests/CustomerRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/requests/CustomerUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/requests/CustomerUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/responses/CustomerShortResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/dtos/responses/CustomerShortResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/openapi/controller/CustomerControllerOpenApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/api/openapi/controller/CustomerControllerOpenApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/application/impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/application/impl/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/application/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/application/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/domain/entity/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/domain/entity/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/domain/exception/customized_exceptions/CustomerNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/domain/exception/customized_exceptions/CustomerNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/infrastructure/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/infrastructure/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/infrastructure/repositories/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bytebank/customers/infrastructure/repositories/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/br/com/bytebank/customers/tests_builders/CustomerTestsBuilders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/com/bytebank/customers/tests_builders/CustomerTestsBuilders.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,13 +31,40 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="58" />
+    <option name="cachedIndexableFilesCount" value="98" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bytebank-customer" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,6 +106,12 @@
     &quot;accountId&quot;: &quot;7c377a9f-b6a0-402f-ac5d-24a135053f61&quot;
   }
 }</component>
+  <component name="HttpClientEndpointsTabState">
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests /&gt;" />
+  </component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -72,61 +122,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.4902887154243945" />
-      <entry key="MS500" value="2.7948168126456574" />
-      <entry key="S2" value="9.390430846420903" />
-      <entry key="S5" value="15.208287643597366" />
-      <entry key="S10" value="19.242670376736562" />
-      <entry key="S30" value="26.037675544043896" />
-      <entry key="S60" value="29.362823529391562" />
-      <entry key="M2" value="31.484046292014106" />
-      <entry key="M5" value="32.94117699539265" />
-      <entry key="M10" value="33.461386684140194" />
-      <entry key="M15" value="33.63885276061798" />
-      <entry key="M30" value="33.83016038401715" />
-      <entry key="H1" value="34.85834551172171" />
-      <entry key="H2" value="43.44142858185857" />
-      <entry key="H4" value="65.47621988169246" />
-      <entry key="D1" value="125.68589405503127" />
-      <entry key="W1" value="145.3005153407342" />
+      <entry key="MS100" value="7.494268063620597E-4" />
+      <entry key="MS500" value="0.5982396192802922" />
+      <entry key="S2" value="4.012073576117232" />
+      <entry key="S5" value="8.634618689854932" />
+      <entry key="S10" value="13.264013825426678" />
+      <entry key="S30" value="20.158576635401875" />
+      <entry key="S60" value="23.089119048893245" />
+      <entry key="M2" value="24.90493858562951" />
+      <entry key="M5" value="27.438582475003038" />
+      <entry key="M10" value="34.36654488593945" />
+      <entry key="M15" value="42.82662297144828" />
+      <entry key="M30" value="65.45700883678445" />
+      <entry key="H1" value="92.15665696190447" />
+      <entry key="H2" value="119.01599649024323" />
+      <entry key="H4" value="151.7299481348288" />
+      <entry key="D1" value="228.91107157809708" />
+      <entry key="W1" value="254.20012538218742" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="2.8331033814890538E-245" />
-      <entry key="MS500" value="1.2370012539574808E-49" />
-      <entry key="S2" value="7.451889694204201E-13" />
-      <entry key="S5" value="2.0329697974461158E-5" />
-      <entry key="S10" value="0.0063194108819514365" />
-      <entry key="S30" value="0.29288467764487514" />
-      <entry key="S60" value="0.765160648067195" />
-      <entry key="M2" value="1.2369826956712515" />
-      <entry key="M5" value="1.6502768274638817" />
-      <entry key="M10" value="1.8167379611797034" />
-      <entry key="M15" value="1.8758782541175778" />
-      <entry key="M30" value="1.937811369906177" />
-      <entry key="H1" value="2.038836306300201" />
-      <entry key="H2" value="2.6409693720323646" />
-      <entry key="H4" value="4.058528298424799" />
-      <entry key="D1" value="7.659816972971695" />
-      <entry key="W1" value="8.788740982104532" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.000000000000035" />
+      <entry key="M2" value="1.0000007444693333" />
+      <entry key="M5" value="1.024041572819061" />
+      <entry key="M10" value="1.9163851986272673" />
+      <entry key="M15" value="4.209896920026525" />
+      <entry key="M30" value="12.550498537920646" />
+      <entry key="H1" value="23.20437466376428" />
+      <entry key="H2" value="32.23890128735836" />
+      <entry key="H4" value="39.011686710407055" />
+      <entry key="D1" value="48.2499196962132" />
+      <entry key="W1" value="50.57793219917874" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.4495366862748915" />
-      <entry key="MS500" value="2.7792612324113466" />
-      <entry key="S2" value="9.376897486684934" />
-      <entry key="S5" value="15.19934203889043" />
-      <entry key="S10" value="19.24260225680883" />
-      <entry key="S30" value="26.321687249386194" />
-      <entry key="S60" value="30.118599689334257" />
-      <entry key="M2" value="32.71391078796739" />
-      <entry key="M5" value="34.58776220024909" />
-      <entry key="M10" value="35.27610924068727" />
-      <entry key="M15" value="35.51334723704898" />
-      <entry key="M30" value="35.767252065912906" />
-      <entry key="H1" value="36.89674067659855" />
-      <entry key="H2" value="46.08200333980911" />
-      <entry key="H4" value="69.53439375226658" />
-      <entry key="D1" value="133.3455945668262" />
-      <entry key="W1" value="154.0892372428196" />
+      <entry key="MS100" value="0.0012430925907286506" />
+      <entry key="MS500" value="0.8151091098805188" />
+      <entry key="S2" value="4.691529685651218" />
+      <entry key="S5" value="9.484058527536673" />
+      <entry key="S10" value="14.173078258884901" />
+      <entry key="S30" value="21.114134953626635" />
+      <entry key="S60" value="24.062995611241007" />
+      <entry key="M2" value="25.89059806165859" />
+      <entry key="M5" value="28.456366020294094" />
+      <entry key="M10" value="36.27767071785462" />
+      <entry key="M15" value="47.02960617009578" />
+      <entry key="M30" value="77.99798746677264" />
+      <entry key="H1" value="115.35243217786353" />
+      <entry key="H2" value="151.2489431829728" />
+      <entry key="H4" value="190.7380247133235" />
+      <entry key="D1" value="277.16024695964506" />
+      <entry key="W1" value="304.77794620076037" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -143,6 +193,9 @@
     &quot;Docker.docker_customer/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build bytebank-customer.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.CustomerServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CustomerServiceTest.mustCreateCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CustomerServiceTest.mustReturnCachedResponseWhenDuplicateRequest.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.bytebank_customer-endpoints | #1.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
@@ -169,8 +222,26 @@
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/User/OneDrive/Documentos/Java Projetos 2026/ByteBank/bytebank-customer/src/main/java/org/thales/Main.java&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="bytebank_customer-endpoints | #1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="RunManager" selected="Spring Boot.CustomersApplication">
     <configuration name="CustomerServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -197,6 +268,63 @@
       <RunAsTest>true</RunAsTest>
       <GradleProfilingDisabled>false</GradleProfilingDisabled>
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CustomerServiceTest.mustCreateCustomer" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;br.com.bytebank.customers.service.CustomerServiceTest.mustCreateCustomer&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CustomerServiceTest.mustReturnCachedResponseWhenDuplicateRequest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;br.com.bytebank.customers.service.CustomerServiceTest.mustReturnCachedResponseWhenDuplicateRequest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="bytebank_customer-endpoints | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/bytebank_customer-endpoints.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="CustomersApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -237,33 +365,29 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker/docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker/docker-compose.dev.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Docker.docker/docker-compose.dev.yml: Compose Deployment" />
       <item itemvalue="Docker.docker_customer/docker-compose.dev.yml: Compose Deployment" />
+      <item itemvalue="Gradle.CustomerServiceTest.mustCreateCustomer" />
+      <item itemvalue="Gradle.CustomerServiceTest.mustReturnCachedResponseWhenDuplicateRequest" />
       <item itemvalue="Gradle.CustomerServiceTest" />
+      <item itemvalue="HTTP Request.bytebank_customer-endpoints | #1" />
       <item itemvalue="Spring Boot.CustomersApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.bytebank_customer-endpoints | #1" />
         <item itemvalue="Docker.docker_customer/docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="Gradle.CustomerServiceTest.mustReturnCachedResponseWhenDuplicateRequest" />
         <item itemvalue="Gradle.CustomerServiceTest" />
-        <item itemvalue="Docker.docker/docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="Gradle.CustomerServiceTest.mustCreateCustomer" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
       </set>
     </attachedChunks>
   </component>
@@ -281,7 +405,23 @@
       <workItem from="1780109759526" duration="12000" />
       <workItem from="1780110132657" duration="67000" />
       <workItem from="1780110624816" duration="4000" />
-      <workItem from="1780320717129" duration="7911000" />
+      <workItem from="1780320717129" duration="12626000" />
+      <workItem from="1780359675089" duration="1936000" />
+      <workItem from="1780421986647" duration="1200000" />
+      <workItem from="1780968335029" duration="302000" />
+      <workItem from="1780968724866" duration="1306000" />
+      <workItem from="1780970732847" duration="12000" />
+      <workItem from="1781021175160" duration="606000" />
+      <workItem from="1781114320426" duration="524000" />
+      <workItem from="1781117814689" duration="34000" />
+      <workItem from="1781122265326" duration="269000" />
+      <workItem from="1781122665873" duration="630000" />
+      <workItem from="1781123410016" duration="611000" />
+      <workItem from="1781140834136" duration="3414000" />
+      <workItem from="1781186183014" duration="152000" />
+      <workItem from="1781542863259" duration="44000" />
+      <workItem from="1781625036588" duration="773000" />
+      <workItem from="1781625824842" duration="2676000" />
     </task>
     <servers />
   </component>

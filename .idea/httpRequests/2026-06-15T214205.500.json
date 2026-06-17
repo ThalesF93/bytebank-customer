@@ -1,0 +1,7 @@
+{
+  "code": "INTERNAL_ERROR",
+  "message": "Unexpected Error",
+  "status": 500,
+  "path": "/api/v2/customers",
+  "timestamp": "2026-06-16T00:42:05.717210200Z"
+}

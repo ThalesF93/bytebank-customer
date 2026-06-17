@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v2/customers")
+@RequestMapping("/api/v2/customers")
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerControllerV2 implements CustomerControllerOpenApi {
@@ -62,8 +62,13 @@ public class CustomerControllerV2 implements CustomerControllerOpenApi {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerShortResponseDTO> findCustomerById(@PathVariable UUID id){
-        return ResponseEntity.ok(service.findCustomerById(id));
+    public ResponseEntity<CustomerClientResponseDTO> findCustomerById(@PathVariable UUID id){
+        return ResponseEntity.ok(service.findCustomerByIdWithFeign(id));
+    }
+
+    @GetMapping("/phone/{phone}")
+    public ResponseEntity<String> findByPhone(@PathVariable String phone) {
+        return ResponseEntity.ok(service.findCustomerByPhoneNumber(phone));
     }
 }
 

@@ -12,7 +12,7 @@ public class CustomerTestsBuilders {
 
     public static CustomerRequestDTO customerRequestDTOBuilder() {
         return new CustomerRequestDTO(
-                "Mock", "123.456.789-10", "email@email.com", "test", 33
+                "Mock", "123.456.789-10", "13997879065", "email@email.com", "nada", 33
         );
     }
     public static CustomerResponseDTO customerResponseDTOBuilder() {
@@ -43,6 +43,6 @@ public class CustomerTestsBuilders {
         return customerEntity;
     }
     public static CustomerUpdateDTO customerUpdateDTOBuilder(){
-        return new CustomerUpdateDTO("Thales Fernandes", "email@email.com", "Paulista");
+        return new CustomerUpdateDTO("Thales Fernandes", "email@email.com", "13997879065", "nada");
     }
 }

@@ -1,6 +1,11 @@
 package br.com.bytebank.customers.infrastructure.config;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -20,12 +25,10 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class RedisConfig {
 
-    private final ObjectMapper objectMapper;
-
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         var template = new RedisTemplate<String, Object>();
-        var serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+        var serializer = new GenericJackson2JsonRedisSerializer(redisObjectMapper());
 
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
@@ -33,13 +36,12 @@ public class RedisConfig {
         template.setValueSerializer(serializer);
         template.setHashValueSerializer(serializer);
         template.afterPropertiesSet();
-
         return template;
     }
 
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-        var serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+        var serializer = new GenericJackson2JsonRedisSerializer(redisObjectMapper());
 
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(5))
@@ -54,5 +56,19 @@ public class RedisConfig {
         return RedisCacheManager.builder(connectionFactory)
                 .cacheDefaults(config)
                 .build();
+    }
+
+    private ObjectMapper redisObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.activateDefaultTyping(
+                BasicPolymorphicTypeValidator.builder()
+                        .allowIfBaseType(Object.class)
+                        .build(),
+                ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY
+        );
+        return mapper;
     }
 }

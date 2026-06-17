@@ -8,8 +8,11 @@ public record CustomerUpdateDTO(
         @Schema(description = "Name updated")
         String name,
 
-        @Schema(description = "email updated")
+        @Schema(description = "Email updated")
         String email,
+
+        @Schema(description = "Phone updated")
+        String phoneNumber,
 
         @Schema(description = "Address updated")
         String address

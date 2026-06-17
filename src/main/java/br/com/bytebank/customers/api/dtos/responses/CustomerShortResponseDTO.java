@@ -17,6 +17,9 @@ public record CustomerShortResponseDTO(
         @Schema(description = "Customer's name")
         String name,
 
+        @Schema(description = "Customer's phone number")
+        String phoneNumber,
+
         @Schema(description = "Customer's email")
         String email,
 

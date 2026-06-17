@@ -14,6 +14,9 @@ public record CustomerRequestDTO(
         @NotBlank(message = "The CPF field is required.")
         String cpf,
 
+        @NotBlank(message = "Phone number must be informed")
+        String phoneNumber,
+
         @Email
         @NotBlank(message = "The EMAIL field is required.")
         String email,

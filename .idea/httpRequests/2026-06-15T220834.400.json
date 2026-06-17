@@ -1,0 +1,7 @@
+{
+  "code": "VALIDATION_ERROR",
+  "message": "address: The Address field is required., email: The EMAIL field is required., age: Minimum age is 18 years.",
+  "status": 400,
+  "path": "/api/v2/customers",
+  "timestamp": "2026-06-16T01:08:34.679518200Z"
+}

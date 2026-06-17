@@ -2,6 +2,7 @@ package br.com.bytebank.customers.application.service;
 
 import br.com.bytebank.customers.api.dtos.requests.CustomerRequestDTO;
 import br.com.bytebank.customers.api.dtos.requests.CustomerUpdateDTO;
+import br.com.bytebank.customers.api.dtos.responses.CustomerClientResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerResponseDTO;
 import br.com.bytebank.customers.api.dtos.responses.CustomerShortResponseDTO;
 import br.com.bytebank.customers.application.impl.CustomerServiceImpl;
@@ -17,8 +18,12 @@ public interface CustomerService {
 
     Page<CustomerShortResponseDTO> getCustomers(Pageable pageable);
 
+    String findCustomerByPhoneNumber(String phone);
+
     CustomerUpdateDTO updateCustomer(UUID id, CustomerUpdateDTO customerRequestDTO);
 
     CustomerShortResponseDTO findCustomerById(UUID id);
+
+    CustomerClientResponseDTO findCustomerByIdWithFeign(UUID id);
 
 }

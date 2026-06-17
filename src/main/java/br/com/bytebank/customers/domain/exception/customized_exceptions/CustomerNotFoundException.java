@@ -9,4 +9,8 @@ public class CustomerNotFoundException extends DefaultException {
     public CustomerNotFoundException(UUID uuid) {
         super("CUSTOMER_NOT_FOUND", "Customer with id " + uuid + " not found", HttpStatus.NOT_FOUND);
     }
+
+    public CustomerNotFoundException(String phone){
+        super("CUSTOMER_NOT_FOUND", "Customer with phone " + phone + " not found", HttpStatus.NOT_FOUND);
+    }
 }

@@ -37,6 +37,9 @@ public class Customer {
     private String email;
 
     @Column
+    private String phoneNumber;
+
+    @Column
     private Integer age;
 
     @Column
